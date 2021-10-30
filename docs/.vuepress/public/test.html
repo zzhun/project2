@@ -1,0 +1,26 @@
+<button onclick="openOrClose()">开启/关闭</button>
+<script>
+
+    let lastTime = 0;  
+    let fpsInterVal = 30; // fps监听间隔次数
+    let fpsCount = 0; // fps监听间隔计数
+    let flag = false
+    let getFps = function() {
+      fpsCount++;
+      let nowTime = performance.now();
+      return Math.round(1000 * fpsCount  / ( nowTime - lastTime ));;
+    }    
+      
+
+    let startDraw = function(time) {
+      console.log("1秒内执行的fps:" + getFps(),new Date().getTime())
+      if(flag){
+        window.requestAnimationFrame(startDraw)
+      }
+    }
+  
+    function openOrClose(){
+      flag = !flag
+      startDraw()
+    }
+</script>
