@@ -24,7 +24,29 @@ fps 的值受限于屏幕的刷新率，即 fps 的值小于等于屏幕刷新�
 
 - 计算方法
 
-  根据浏览器的的渲染频率绘制页面，减少不必要的计算和动画绘制过程，requestAnimationFrame（）方法的调用频率就是我们需要的 fps
-  我们使用`window.performance.now()获取当前的时间，根据下一次绘制时间计算时间间隔，计算 fps
+  根据浏览器的的渲染频率绘制页面，减少不必要的计算和动画绘制过程，requestAnimationFrame（）方法的调用频率就是我们需要的 fps,
+  如果记录固定时间内的帧数，就可以计算出同步率，fps 的计算公式：fps = frameNum / elapsedTime;
 
-[dd](./test.html)
+```javascript
+var frame = 0;
+var lastTime = Date.now();
+
+var loop = function () {
+  var now = Date.now();
+  var fps = 0;
+
+  frame++;
+
+  if (now > 1000 + lastTime) {
+    const elapsedTime = now - lastTime;
+    var fps = Math.round((frame * 1000) / elapsedTime);
+    console.log(`1S内 FPS：${fps};一帧所需要的时间为${elapsedTime}`);
+    frame = 0;
+    lastTime = now;
+  }
+
+  requestAnimationFrame(loop);
+};
+
+loop();
+```
