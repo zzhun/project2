@@ -10,9 +10,9 @@ module.exports = {
     navbar: false,
     search: false,
     sidebarDepth: 2, // e'b将同时提取markdown中h2 和 h3 标题，显示在侧边栏上。
-    lastUpdated: "Last Updated", // 文档更新时间：每个文件git最后提交的时间
+    
     sidebar: {
-      "/": ["/README1", "/README2", "/Functional"],
+      "/": ["/v-if VS v-show","/Functional","/LocalVariables"],
       // "/": commonSidebar,
     },
   },
